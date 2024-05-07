@@ -1,0 +1,7 @@
+{
+  "name": "ionic-passkeys",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}

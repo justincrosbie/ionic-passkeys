@@ -1,0 +1,49 @@
+[package]
+name = "shared"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+getrandom = {version = "0.2", features = ["js"]}
+argon2 = "0.5.2"
+ecies = {version = "0.2"}
+sha-1 = "0.10"
+sha2 = "0.10"
+ring = "0.17"
+hex = "0.4.3"
+aes-gcm = "0.10"
+chacha20poly1305 = "0.10"
+base32 = "0.4"
+rand = "0.8"
+hmac = "0.12"
+image = "0.23"
+rqrr = "0.6"
+unic-langid = "0.9"
+pbkdf2 = { version = "0.12", default-features = false }
+k256 = {version = "0.13", features =["ecdh"]}
+base58 = { version = "0.2.0" }
+ripemd = { version = "0.1.3", default-features = false }
+magic-crypt = {version =  "3.1.12", default-features = false}
+base64 = "0.21"
+uuid = { version = "1.4", features = ["serde", "v4", "js"] }
+chrono = { version = "0.4.11", features = ["serde"] }
+sha3 = "0.10"
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+webauthn-rs = { version = "0.4", features = ["danger-allow-state-serialisation"] }
+reqwest = "0.11"
+prometheus = "0.13"
+csv = "1.3"
+url = "2.4"
+clap = { version = "4.0.8", features = ["derive"] }
+regex = "1"
+itertools = "0.11"
+jsonwebtoken = "8.3.0"
+lazy_static = "1.4.0"
+otpauth = "0.4"
+fluent = "0.16"
+fluent-resmgr = "0.0.6"
+fluent-langneg = "0.13"
+tokio = { version = "1", features = ["full"] }

@@ -1,0 +1,9 @@
+/Users/justincrosbie/dev/ionic-passkeys/rust/target/debug/deps/librocket_sync_db_pools-f30b38552e0b89f8.rmeta: /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/lib.rs /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/poolable.rs /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/config.rs /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/error.rs /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/connection.rs
+
+/Users/justincrosbie/dev/ionic-passkeys/rust/target/debug/deps/rocket_sync_db_pools-f30b38552e0b89f8.d: /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/lib.rs /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/poolable.rs /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/config.rs /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/error.rs /Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/connection.rs
+
+/Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/lib.rs:
+/Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/poolable.rs:
+/Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/config.rs:
+/Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/error.rs:
+/Users/justincrosbie/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rocket_sync_db_pools-0.1.0/src/connection.rs:

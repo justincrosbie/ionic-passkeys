@@ -1,0 +1,1 @@
+fn(Extension<{type error}>, tower_sessions::Session, axum::extract::Path<std::string::String>) -> impl std::future::Future<Output = Result<impl IntoResponse, webauthn_rs::prelude::WebauthnError>> {start_authentication}

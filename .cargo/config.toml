@@ -1,0 +1,3 @@
+[env]
+ROCKET_DATABASES='{db={url="postgres://postgres:password@localhost/passkeys"}}'
+ROCKET_ADDRESS= "0.0.0.0"

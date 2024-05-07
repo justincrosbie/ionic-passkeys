@@ -1,0 +1,1 @@
+fn(Extension<{type error}>, tower_sessions::Session, axum::Json<webauthn_rs::prelude::RegisterPublicKeyCredential>) -> impl std::future::Future<Output = Result<impl IntoResponse, webauthn_rs::prelude::WebauthnError>> {finish_register}
