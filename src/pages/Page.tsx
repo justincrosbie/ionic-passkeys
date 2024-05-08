@@ -13,7 +13,8 @@ const client = axios.create({
 
 const Page: React.FC = () => {
 
-  const username = "justincrosbie+7@gmail.com";
+  const username = "justincrosbie+10@gmail.com";
+  const displayName = "Le Duderino3";
 
   function registerPasskey() {
 
@@ -22,9 +23,7 @@ const Page: React.FC = () => {
     try {
 
       const fetchPost = async () => {
-        const data = {
-          "user_email": username
-        };
+        const data = {username, displayName};
 
         let response = await client.post('start_registration', data);
 

@@ -27,6 +27,7 @@ diesel::table! {
     users (uuid) {
         uuid -> Uuid,
         username -> Varchar,
+        displayname -> Varchar,
         email -> Varchar,
         mobile -> Varchar,
         public_key -> Varchar,

@@ -60,12 +60,12 @@ fn rocket() -> _ {
     let database_url = env::var("DATABASE_URL").unwrap_or(".".to_string());
     println!("database_url: {:?}", database_url);
 
-    let app_state = AppState::new();
+    // let app_state = AppState::new();
     
     rocket::build()
     .attach(db::stage())
     .attach(cors::CORS)
-    .manage(app_state)
+    // .manage(app_state)
     .register("/", catchers![default])
     .attach(apis::stage())
     .mount("/", FileServer::from(dist_folder).rank(1))

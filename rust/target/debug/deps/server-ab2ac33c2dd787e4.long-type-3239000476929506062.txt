@@ -1,1 +1,0 @@
-for<'a> fn(&'a Db, RegisterUser, std::string::String, std::option::Option<uuid::Uuid>) -> impl std::future::Future<Output = Result<db::users::User, diesel::result::Error>> {create_user}

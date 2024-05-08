@@ -51,7 +51,10 @@ use webauthn_rs::prelude::{Base64UrlSafeData, CreationChallengeResponse, PublicK
 // Request to start the registration process
 #[derive(Deserialize,Serialize, Clone, Debug)]
 pub struct StartRegistrationRequest {
-    pub user_email: String,
+    pub username: String,
+
+    #[serde(rename = "displayName")]
+    pub displayname: String,
 }
 
 // Response with registration challenge
@@ -140,5 +143,5 @@ pub struct MyClientData {
     #[serde(rename = "type")]
     pub type_: String,
     #[serde(rename = "crossOrigin")]
-    pub cross_origin: bool
+    pub cross_origin: Option<bool>
 }

@@ -11,12 +11,13 @@ pub fn hello() -> &'static str {
 }
 
 #[post("/start_registration", format = "json", data = "<request>")]
-pub async fn start_registration(db: Db, state: &State<AppState>, request: Json<StartRegistrationRequest>) -> Result<Json<StartRegistrationResponse>, status::BadRequest<String>> {
+pub async fn start_registration(db: Db, request: Json<StartRegistrationRequest>) -> Result<Json<StartRegistrationResponse>, status::BadRequest<String>> {
 
-    let email = request.user_email.clone();
-    let webauthn = state.webauthn.clone(); // Clone the state.webauthn value
+    println!("Start Registration Request: {:?}", request);
 
-    let result = start_registration_bl(&db, email, webauthn).await;
+    let webauthn = AppState::new().webauthn; // Clone the state.webauthn value
+
+    let result = start_registration_bl(&db, request.username.clone(), request.displayname.clone(), webauthn).await;
     match result {
         Ok(r) => Ok(Json(StartRegistrationResponse::new(r))),
         Err(e) => return Err(status::BadRequest(e.to_string())),
@@ -24,11 +25,11 @@ pub async fn start_registration(db: Db, state: &State<AppState>, request: Json<S
 }
 
 #[post("/complete_registration", format = "json", data = "<request>")]
-pub async fn complete_registration(db: Db, state: &State<AppState>, request: Json<CompleteRegistrationRequest>) -> Result<Json<CompleteRegistrationResponse>, status::BadRequest<String>> {
+pub async fn complete_registration(db: Db, request: Json<CompleteRegistrationRequest>) -> Result<Json<CompleteRegistrationResponse>, status::BadRequest<String>> {
 
     println!("Complete Registration Request: {:?}", request);
 
-    let webauthn = state.webauthn.clone(); // Clone the state.webauthn value
+    let webauthn = AppState::new().webauthn; // Clone the state.webauthn value
 
     // let credential = serde_json::from_str::<RegisterPublicKeyCredential>(&request.credential);
     // let credential = match credential {
@@ -45,10 +46,10 @@ pub async fn complete_registration(db: Db, state: &State<AppState>, request: Jso
 }
 
 #[post("/start_authentication", format = "json", data = "<request>")]
-pub async fn start_authentication(db: Db, state: &State<AppState>, request: Json<StartAuthenticationRequest>) -> Result<Json<StartAuthenticationResponse>, status::BadRequest<String>> {
+pub async fn start_authentication(db: Db, request: Json<StartAuthenticationRequest>) -> Result<Json<StartAuthenticationResponse>, status::BadRequest<String>> {
 
     let username = request.username.clone();
-    let webauthn = state.webauthn.clone(); // Clone the state.webauthn value
+    let webauthn = AppState::new().webauthn; // Clone the state.webauthn value
 
     let result = start_authentication_bl(&db, username, webauthn).await;
     match result {
@@ -58,11 +59,11 @@ pub async fn start_authentication(db: Db, state: &State<AppState>, request: Json
 }
 
 #[post("/complete_authentication", format = "json", data = "<request>")]
-pub async fn complete_authentication(db: Db, state: &State<AppState>, request: Json<CompleteAuthenticationRequest>) -> Result<Json<CompleteAuthenticationResponse>, status::BadRequest<String>> {
+pub async fn complete_authentication(db: Db, request: Json<CompleteAuthenticationRequest>) -> Result<Json<CompleteAuthenticationResponse>, status::BadRequest<String>> {
 
     println!("Complete Registration Request: {:?}", request);
 
-    let webauthn = state.webauthn.clone(); // Clone the state.webauthn value
+    let webauthn = AppState::new().webauthn; // Clone the state.webauthn value
 
     // let credential = serde_json::from_str::<RegisterPublicKeyCredential>(&request.credential);
     // let credential = match credential {

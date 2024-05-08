@@ -4,8 +4,6 @@ use crate::db::credentials::{self, get_credentials_for_user};
 use crate::db::regstates::Regstate;
 use crate::db::users::{create_user, get_user_from_email, get_user_from_username_nocase};
 use crate::db::{regstates, Db};
-use base64::{encode_config, URL_SAFE_NO_PAD};
-use rand::RngCore;
 
 use shared::errors::{BusinessError, DbErrors};
 use shared::json::auth::RegisterUser;
@@ -13,16 +11,7 @@ use shared::json::passkeys::{MyClientData, MyPasskeyAuthentication, MyPasskeyReg
 use webauthn_rs::prelude::{AuthenticationResult, CreationChallengeResponse, Passkey, PasskeyAuthentication, PasskeyRegistration, PublicKeyCredential, RegisterPublicKeyCredential, RequestChallengeResponse, WebauthnError};
 use webauthn_rs::Webauthn;
 
-// Placeholder for a function to generate a challenge
-// In a real implementation, this would generate a secure, random challenge
-pub fn generate_challenge() -> String {
-    let mut rng = rand::thread_rng();
-    let mut bytes = [0u8; 32]; // 32 bytes = 256 bits
-    rng.fill_bytes(&mut bytes);
-    encode_config(&bytes, URL_SAFE_NO_PAD)
-}
-
-pub async fn start_registration_bl(db: &Db, username: String, webauthn: Arc<Webauthn>) ->  Result<CreationChallengeResponse, BusinessError> {
+pub async fn start_registration_bl(db: &Db, username: String, displayname: String, webauthn: Arc<Webauthn>) ->  Result<CreationChallengeResponse, BusinessError> {
 
     let user = match get_user_from_email(&db, username.clone()).await {
         Ok(r) => r,
@@ -31,11 +20,12 @@ pub async fn start_registration_bl(db: &Db, username: String, webauthn: Arc<Weba
 
             let new_register_user = RegisterUser {
                 username: username.clone(),
+                displayname: displayname.clone(),
                 email: username.clone(),
                 mobile: "".to_string(),
             };
 
-            match create_user(&db, new_register_user, "".to_string(), None).await {
+            match create_user(&db, new_register_user, None).await {
                 Ok(r) => r,
                 Err(e) => {
                     return Err(BusinessError::DbError(DbErrors::User(e.to_string())))
@@ -56,7 +46,7 @@ pub async fn start_registration_bl(db: &Db, username: String, webauthn: Arc<Weba
     match webauthn.start_passkey_registration(
         user.uuid,
         &username,
-        &username,
+        &displayname,
         exclude_credentials,
     ) {
         Ok((ccr, reg_state)) => {
@@ -149,6 +139,8 @@ pub async fn complete_registration_bl(db: &Db, username: String, req: &RegisterP
             return Err(BusinessError::DbError(DbErrors::User(e.to_string())))
         },
     };
+
+    println!("complete_registration_bl, got user: {:?}", user);
 
     let cdj = req.response.client_data_json.clone();
 

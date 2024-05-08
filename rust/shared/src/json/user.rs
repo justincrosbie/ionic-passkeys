@@ -43,6 +43,7 @@ impl HardwareSecurityKey {
 pub struct User {
     pub uuid: Uuid,
     pub username: String,
+    pub displayname: String,
     pub email: String,
     pub mobile: String,
     pub user_state: UserState,

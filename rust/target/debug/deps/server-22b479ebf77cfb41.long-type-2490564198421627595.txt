@@ -1,1 +1,0 @@
-(uuid::Uuid, std::string::String, std::string::String, std::string::String, std::string::String, std::option::Option<HashMap<std::string::String, HardwareSecurityKey>>, i64, bool)

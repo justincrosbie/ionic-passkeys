@@ -21,6 +21,7 @@ impl LoginUser {
 #[derive(Deserialize,Serialize, Clone, Debug)]
 pub struct RegisterUser {
     pub username: String,
+    pub displayname: String,
     pub email: String,
     pub mobile: String
 }
@@ -28,9 +29,10 @@ pub struct RegisterUser {
 #[wasm_bindgen]
 impl RegisterUser {
     #[wasm_bindgen(constructor)]
-    pub fn new(username: String, email: String, mobile: String) -> RegisterUser {
+    pub fn new(username: String, displayname: String, email: String, mobile: String) -> RegisterUser {
         RegisterUser { 
             username: username,
+            displayname: displayname,
             email: email,
             mobile: mobile
         }

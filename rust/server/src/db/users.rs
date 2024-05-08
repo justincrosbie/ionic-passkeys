@@ -6,7 +6,7 @@ use uuid;
 use crate::schema::users;
 
 use super::Db;
-use shared::json::user::{UserState, UpdateUser, User as Usr};
+use shared::json::user::{UserState, User as Usr};
 use shared::json::auth::RegisterUser as RegUsr;
 
 #[derive(Queryable, Insertable, Clone, Debug)]
@@ -14,6 +14,7 @@ use shared::json::auth::RegisterUser as RegUsr;
 pub struct User {
     pub uuid: uuid::Uuid,
     pub username: String,
+    pub displayname: String,
     pub email: String,
     pub mobile: String,
     pub public_key: String,
@@ -31,6 +32,7 @@ impl User {
                 None => uuid::Uuid::new_v4(),
             },
             username: json_user.username,
+            displayname: json_user.displayname,
             email: json_user.email,
             mobile: json_user.mobile,
             public_key: "UNKNOWN".to_string(),
@@ -52,6 +54,7 @@ impl User {
         Usr {
             uuid: self.uuid,
             username: self.username.to_string(),
+            displayname: self.displayname.to_string(),
             email: self.email.to_string(),
             mobile: self.mobile.to_string(),
             user_state: user_state,
@@ -62,7 +65,7 @@ impl User {
     }
 }
 
-pub async fn create_user(db: &Db, reg_user: RegUsr, secret: String, uuid: Option<uuid::Uuid>) -> Result<User, Error> {
+pub async fn create_user(db: &Db, reg_user: RegUsr, uuid: Option<uuid::Uuid>) -> Result<User, Error> {
     let new_user = User::from_json_reg_user(reg_user, uuid);
     let user: Result<User, Error> = db.run(move |conn| {
         diesel::insert_into(users::table)
