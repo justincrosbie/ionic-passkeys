@@ -29,3 +29,9 @@ yarn-error.log*
 .eslintcache
 
 rust/target
+dist
+android
+ios
+ionic-passkeys/node_modules
+ionic-passkeys/android/bin
+ionic-passkeys/android/.gradle

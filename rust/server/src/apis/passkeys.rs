@@ -73,7 +73,7 @@ pub async fn complete_authentication(db: Db, state: &State<AppState>, request: J
     let credential = request.credential.clone();
     let result = complete_authentication_bl(&db, &credential, webauthn).await;
     match result {
-        Ok(r) => Ok(Json(CompleteAuthenticationResponse { success: true, message: "Registration successful.".to_string() })),
+        Ok(r) => Ok(Json(CompleteAuthenticationResponse { success: true, message: "Authentication successful.".to_string() })),
         Err(e) => return Err(status::BadRequest(e.to_string())),
     }
 }

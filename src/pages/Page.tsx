@@ -13,7 +13,7 @@ const client = axios.create({
 
 const Page: React.FC = () => {
 
-  const username = "justincrosbie+6@gmail.com";
+  const username = "justincrosbie+7@gmail.com";
 
   function registerPasskey() {
 
@@ -31,8 +31,6 @@ const Page: React.FC = () => {
         console.log('start_registration result');
 
         console.log(response.data);
-        console.log(response.data.challenge);
-        console.log(response.data.challenge.publicKey.challenge);
 
         console.log('start_registration result ok');
 
@@ -42,16 +40,6 @@ const Page: React.FC = () => {
           console.log('passkeyRegister result');
           console.log(regresult);
           console.log('passkeyRegister result ok');
-
-          const pkcred = regresult.credential;
-
-          console.log(pkcred);
-          console.log(pkcred?.id);
-          console.log(pkcred?.type);
-          console.log(pkcred?.rawId);
-          console.log(pkcred?.response);
-          
-          console.log('passkeyRegister credential ok');
 
           const str = JSON.stringify(regresult.credential);
           console.log('str ok', str);
