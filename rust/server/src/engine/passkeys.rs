@@ -8,7 +8,7 @@ use crate::db::{regstates, Db};
 use shared::errors::{BusinessError, DbErrors};
 use shared::json::auth::RegisterUser;
 use shared::json::passkeys::{MyClientData, MyPasskeyAuthentication, MyPasskeyRegistration};
-use webauthn_rs::prelude::{AuthenticationResult, CreationChallengeResponse, Passkey, PasskeyAuthentication, PasskeyRegistration, PublicKeyCredential, RegisterPublicKeyCredential, RequestChallengeResponse, WebauthnError};
+use webauthn_rs::prelude::{AuthenticationResult, Base64UrlSafeData, CreationChallengeResponse, Passkey, PasskeyAuthentication, PasskeyRegistration, PublicKeyCredential, RegisterPublicKeyCredential, RequestChallengeResponse, WebauthnError};
 use webauthn_rs::Webauthn;
 
 pub async fn start_registration_bl(db: &Db, username: String, displayname: String, webauthn: Arc<Webauthn>) ->  Result<CreationChallengeResponse, BusinessError> {
@@ -157,11 +157,14 @@ pub async fn complete_registration_bl(db: &Db, username: String, req: &RegisterP
         }
     };
 
-    println!("Client Data challenge: {:?}", my_client_data.challenge.clone());
+    let ch_str = my_client_data.challenge.clone().replace("\"", "");
     
-    let regstate = match regstates::get_regstate_by_challenge(&db, my_client_data.challenge.clone()).await {
+    println!("Client Data challenge: {:?}", ch_str);
+
+    let regstate = match regstates::get_regstate_by_challenge(&db, ch_str).await {
         Ok(r) => r,
         Err(e) => {
+            println!("complete_registration_bl, get_regstate_by_challenge error: {:?}", e);
             return Err(BusinessError::DbError(DbErrors::Regstate(e.to_string())))
         },
     };
@@ -290,6 +293,7 @@ pub async fn complete_authentication_bl(db: &Db, auth: &PublicKeyCredential, web
 
     println!("complete_authentication_bl: {:?}", auth);
     
+
     let cdj = auth.response.client_data_json.clone();
     let cdj_str2 = String::from_utf8(cdj.into()).unwrap();
 
@@ -302,11 +306,13 @@ pub async fn complete_authentication_bl(db: &Db, auth: &PublicKeyCredential, web
         }
     };
 
+    println!("Client Data origin: {:?}", my_client_data.origin.clone());
     println!("Client Data challenge: {:?}", my_client_data.challenge.clone());
-    
+
     let regstate = match regstates::get_regstate_by_challenge(&db, my_client_data.challenge.clone()).await {
         Ok(r) => r,
         Err(e) => {
+            println!("complete_authentication_bl, get_regstate_by_challenge error: {:?}", e);
             return Err(BusinessError::DbError(DbErrors::Regstate(e.to_string())))
         },
     };
@@ -349,7 +355,7 @@ pub async fn complete_authentication_bl(db: &Db, auth: &PublicKeyCredential, web
             Ok(ar)
         }
         Err(e) => {
-            println!("WebauthnError!! challenge_register -> {:?}", e);
+            println!("WebauthnError!! challenge_authenticate -> {:?}", e);
             return Err(BusinessError::WebauthnError(WebauthnError::from(e).to_string()));
         }
     }

@@ -45,7 +45,7 @@ SPEC CHECKSUMS:
   CapacitorHaptics: 7c7c206f0c96a628fed073830c96d28c4b2e772e
   CapacitorKeyboard: aec619a578235c6ce279075009a2689c2cf5c42c
   CapacitorStatusBar: f390fbb49b82ffb754ea4b3cf71dc8b048baf3e7
-  IonicPasskeys: 769d7acc881708fbe8b83bfcdd8c151744b39c52
+  IonicPasskeys: 4244c82cc819ed6c8002bd801f7409b4bc301801
 
 PODFILE CHECKSUM: 096608f1dcb257c308979b1322895c42ec776395
 

@@ -8,9 +8,9 @@ extern crate r2d2;
 extern crate r2d2_diesel;
 
 use std::{env, fs};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
-use rocket::fs::{FileServer};
+use rocket::fs::{FileServer, NamedFile};
 
 pub mod schema;
 
@@ -68,6 +68,7 @@ fn rocket() -> _ {
     // .manage(app_state)
     .register("/", catchers![default])
     .attach(apis::stage())
+    .mount("/.well-known", FileServer::from(("./rust/static/.well-known")))
     .mount("/", FileServer::from(dist_folder).rank(1))
 }
 
@@ -75,6 +76,11 @@ fn rocket() -> _ {
 fn default() -> Redirect {
     Redirect::to(uri!("/"))
 
+}
+
+#[get("/.well-known/apple-app-site-association")]
+async fn aasa() -> Option<NamedFile> {
+    NamedFile::open(Path::new("./dist/.well-known/apple-app-site-association")).await.ok()
 }
 
 
