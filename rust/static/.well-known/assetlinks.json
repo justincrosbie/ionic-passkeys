@@ -1,15 +1,5 @@
-[
-    {
-      "relation" : [
-        "delegate_permission/common.handle_all_urls",
-        "delegate_permission/common.get_login_creds"
-      ],
-      "target" : {
-        "namespace" : "android_app",
-        "package_name" : "com.example.android",
-        "sha256_cert_fingerprints" : [
-          SHA_HEX_VALUE
-        ]
-      }
-    }
-  ]
+  [{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "ionic.passkeys",
+                 "sha256_cert_fingerprints": ["92:B3:02:34:18:C8:CA:76:79:16:2D:C8:B2:48:80:E9:A0:45:1B:81:36:C3:8B:4D:8D:C3:AF:9D:8B:13:E5:70"] }
+  }]

@@ -40,6 +40,9 @@ impl AppState {
         let rp_origin = Url::parse("https://0d4b-58-104-243-37.ngrok-free.app").expect("Invalid URL");
         let builder = WebauthnBuilder::new(rp_id, &rp_origin).expect("Invalid configuration");
 
+        let android_origin = Url::parse("android:apk-key-hash:krMCNBjIynZ5Fi3IskiA6aBFG4E2w4tNjcOvnYsT5XA").expect("Invalid URL");
+        let builder = builder.append_allowed_origin(&android_origin);
+
         // Now, with the builder you can define other options.
         // Set a "nice" relying party name. Has no security properties and
         // may be changed in the future.

@@ -105,14 +105,14 @@ const Page: React.FC = () => {
 
               const authresult = await IonicPasskeys.passkeyAuthenticate({ challenge: JSON.stringify(response.data.challenge) });
 
-              console.log('passkeyRegister result');
+              console.log('passkeyAuthenticate result');
               console.log(authresult);
-              console.log('passkeyRegister credential');
+              console.log('passkeyAuthenticate credential');
               console.log(authresult.credential);
-              console.log('passkeyRegister result ok');
+              console.log('passkeyAuthenticate result ok');
 
               if ( !authresult.credential ) {
-                console.log('no credential');
+                console.log('passkeyAuthenticate: no credential');
                 return;
               }
 

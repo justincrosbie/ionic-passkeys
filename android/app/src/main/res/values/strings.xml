@@ -4,4 +4,13 @@
     <string name="title_activity_main">ionic-passkeys</string>
     <string name="package_name">ionic.passkeys</string>
     <string name="custom_url_scheme">ionic.passkeys</string>
+    <string name="asset_statements">
+        [{
+            \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+            \"target\": {
+                \"namespace\": \"android_app\",
+                \"site\": \"https://0d4b-58-104-243-37.ngrok-free.app\"
+            }
+        }]
+        </string>
 </resources>

@@ -16,7 +16,22 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+
+//    signingConfigs {
+//        debug {
+//            storeFile(file("/Users/justincrosbie/ionic-passkeys-keystore"))
+//            storePassword("asd123")
+//            keyAlias("justin")
+//            keyPassword("asd123")
+//        }
+//    }
+//
     buildTypes {
+        debug {
+            minifyEnabled false
+//            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
